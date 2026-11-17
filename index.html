@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daisy Page</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+            background: #f1edfa;
+            color: #514b60;
+            overflow-x: hidden;
+        }
+
+        /* 꽃잎 애니메이션 */
+        .petal {
+            position: fixed;
+            top: -30px;
+            color: white;
+            font-size: 18px;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 1;
+            animation: falling linear infinite;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translateY(-5vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            85% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 상단 메뉴 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(241, 237, 250, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #8b79b7;
+            letter-spacing: 1px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #655d75;
+            margin-left: 25px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: #a18bcf;
+        }
+
+        /* 첫 화면 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 7vw, 65px);
+            color: #8270ad;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #766d87;
+            letter-spacing: 2px;
+        }
+
+        .flower {
+            font-size: 45px;
+            margin-top: 35px;
+            animation: flowerMove 3s ease-in-out infinite;
+        }
+
+        @keyframes flowerMove {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 공통 섹션 */
+        section {
+            padding: 100px 10%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            color: #8270ad;
+            margin-bottom: 45px;
+            letter-spacing: 2px;
+        }
+
+        .card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 45px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(117, 101, 153, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(117, 101, 153, 0.15);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            color: #8b79b7;
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            font-size: 15px;
+            line-height: 2;
+            color: #6f687d;
+        }
+
+        .sub-text {
+            margin-top: 15px;
+            color: #a397b9;
+            font-size: 13px;
+        }
+
+        /* 목표 영역 */
+        .goal-card {
+            background: #e6def5;
+        }
+
+        .goal-card h3 {
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        /* 하단 */
+        footer {
+            text-align: center;
+            padding: 55px 20px;
+            color: #8b80a0;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        footer .footer-flower {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* 모바일 화면 */
+        @media (max-width: 650px) {
+            nav {
+                padding: 18px 5%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .menu a {
+                margin: 0 7px;
+                font-size: 11px;
+            }
+
+            section {
+                padding: 75px 7%;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 25px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 상단 메뉴 -->
+    <nav>
+        <div class="logo">MY DAISY ♡</div>
+
+        <div class="menu">
+            <a href="#about">ABOUT</a>
+            <a href="#major">MAJOR</a>
+            <a href="#lifestyle">LIFESTYLE</a>
+            <a href="#goal">GOAL</a>
+        </div>
+    </nav>
+
+    <!-- 첫 화면 -->
+    <header class="hero">
+        <h1>Welcome to My Page</h1>
+
+        <p>나만의 속도로 배우고 성장하는 사람</p>
+
+        <div class="flower">🌼</div>
+    </header>
+
+    <!-- ABOUT ME -->
+    <section id="about">
+        <h2 class="section-title">ABOUT ME</h2>
+
+        <div class="card">
+            <h3>Who I Am</h3>
+
+            <p>
+                저는 처음에는 조용한 편이지만<br>
+                친해지면 활발하고 편안한 모습을 보여주는 사람입니다.<br>
+                <br>
+                다른 사람과 어울리는 것도 좋아하지만<br>
+                혼자만의 시간을 보내며 에너지를 충전하기도 합니다.
+            </p>
+
+            <div class="sub-text">
+                Slowly, but surely.
+            </div>
+        </div>
+    </section>
+
+    <!-- MY MAJOR -->
+    <section id="major">
+        <h2 class="section-title">MY MAJOR</h2>
+
+        <div class="card">
+            <h3>Radiological Science</h3>
+
+            <p>
+                진로에 대해 고민하던 중 방사선학과를 선택하게 되었습니다.<br>
+                <br>
+                현재는 의료영상과 방사선에 관한 다양한 지식을 배우며<br>
+                전공 분야에 대한 이해를 넓혀가고 있습니다.
+            </p>
+
+            <div class="sub-text">
+                Learning something new every day.
+            </div>
+        </div>
+    </section>
+
+    <!-- MY LIFESTYLE -->
+    <section id="lifestyle">
+        <h2 class="section-title">MY LIFESTYLE</h2>
+
+        <div class="card">
+            <h3>My Little Happiness</h3>
+
+            <p>
+                제가 좋아하는 것은 음악을 듣는 것과 휴식입니다.<br>
+                <br>
+                좋아하는 음악을 들으며 여유로운 시간을 보내는 것이<br>
+                일상 속 작은 행복입니다.
+            </p>
+
+            <div class="sub-text">
+                Music, Rest & Little Moments.
+            </div>
+        </div>
+    </section>
+
+    <!-- MY GOAL -->
+    <section id="goal">
+        <h2 class="section-title">MY GOAL</h2>
+
+        <div class="card goal-card">
+            <h3>Work-Life Balance</h3>
+
+            <p>
+                제가 이루고 싶은 목표는 일과 삶의 균형을 유지하는 것입니다.<br>
+                <br>
+                맡은 일에 최선을 다하면서도<br>
+                나 자신을 위한 시간과 여유를 잃지 않고 싶습니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 하단 -->
+    <footer>
+        <div class="footer-flower">❀</div>
+
+        <p>Thank You ♡</p>
+
+        <p>나만의 속도로, 나답게 성장하기.</p>
+
+        <p>© 2026 MY DAISY PAGE</p>
+    </footer>
+
+    <!-- 떨어지는 꽃잎 -->
+    <script>
+        const symbols = ["❀", "✿", "❁"];
+        const count = 16;
+
+        for (let i = 0; i < count; i++) {
+            const petal = document.createElement("div");
+
+            petal.className = "petal";
+            petal.textContent =
+                symbols[Math.floor(Math.random() * symbols.length)];
+
+            petal.style.left = Math.random() * 100 + "vw";
+            petal.style.fontSize = (12 + Math.random() * 12) + "px";
+            petal.style.animationDuration = (12 + Math.random() * 15) + "s";
+            petal.style.animationDelay = (Math.random() * 15) + "s";
+
+            document.body.appendChild(petal);
+        }
+    </script>
+
+</body>
+</html>
